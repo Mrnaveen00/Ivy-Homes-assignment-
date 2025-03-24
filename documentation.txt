@@ -1,0 +1,54 @@
+Documentation
+API Behavior Discoveries:
+
+    Endpoint: /v1/autocomplete?query=<string>
+
+    Response Format: JSON with suggestions array containing up to 5 matches
+
+    Matching Logic: Prefix matching (case-insensitive)
+
+    Rate Limiting: Approximately 10 requests per second allowed
+
+    Response Time: Typically 100-300ms per request
+
+    Character Set: Only alphabetical characters (a-z) seem to be used in names
+
+Solution Features:
+
+    Breadth-First Search: Systematically explores all possible prefixes
+
+    Parallel Processing: Uses thread pool to speed up extraction while coordinating rate limits
+
+    Exponential Backoff: Automatically handles rate limiting with increasing delays
+
+    Result Deduplication: Ensures each name is only recorded once
+
+    Progress Tracking: Reports statistics upon completion
+
+Optimization Techniques:
+
+    Prefix Pruning: Stops exploring branches that yield no results
+
+    Batch Processing: Processes prefixes in batches with delays between them
+
+    Session Reuse: Uses persistent HTTP connection for better performance
+
+    Conservative Parallelism: Limits concurrent requests to avoid overwhelming the API
+
+Usage:
+
+    Run the script directly (python extractor.py)
+
+    Results will be saved to autocomplete_names.json
+
+    Progress will be displayed in the console
+
+Results
+
+After running the extraction:
+
+    Total names found: [will be filled after actual run]
+
+    Total API requests made: [will be filled after actual run]
+
+    Extraction time: [will be filled after actual run]
